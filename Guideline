@@ -1,0 +1,64 @@
+OTScript Syntax
+
+OTScript is case-sensitive and supports the following primitive data types:
+
+Integer
+Real
+Boolean
+String
+Reserved Words
+OTScript considers the following words reserved:
+
+True
+False
+Predefined Variables
+The only predefined variable for OTScript in Requirements Gateway is EACH, which specifies the current receiver. For example, EACH.requirements returns the list of all the requirements of a document when you select a document.
+
+Operators
+You can use the following operators on integer and real elements:
+
+Arithmetic—Addition, subtraction, multiplication, division (/)
+Comparison—<, >, <=, >=, =, /= (not equal)
+You can use the following operators on integer and real elements:
+
+Comparison—=
+Boolean—AND, OR, NOT(bool) 
+
+For example: 
+
+NOT(V) 
+
+(if V=True then NOT(V) => False 
+
+(if V=False then NOT(V) => True)
+You can use the following operators on string elements:
+
+Concatenation—+
+Comparison—<, >, <=, >=, =, /= (not equal)
+Testing
+OTScript provides functions that determine whether an object belongs to a class or list, whether a list is empty, and whether one string matches another.
+
+Belonging to a Class
+Use the function ISA between an object and a class, as in obj1 ISA class1, to test whether the object belongs to the class. The ISA function returns True if the object belongs to the class. Examples of classes include Folder, Section, and Requirement.
+
+Belonging to a List
+Use the function $< between an object and a list, as in obj1 $< list1, to test if the object belongs to the list. The $< function returns True if the object belongs the list.
+
+Emptiness of a List
+The function $NO(list1) tests if a list of a current document is empty, and returns True if the list is empty.
+
+The function $SOME(list1) tests if a list of a current document is not empty, and returns True if the list is not empty.
+
+String Matching
+The function STRMATCH(string1, string2) tests whether one string matches another. Use an asterisk (*) for 0-n characters and a pound sign (#) for one character. For example, STRMATCH(doc1.name, "TestCard*") tests whether the name of doc1 begins with the string TestCard.
+
+Control Structures
+Use a period (.) between expressions to evaluate the first expression on the second expression, as in <expr1>.<expr2>. OTScript applies each expression to its preceding element. For example, coveredDocuments.requirements.addedText returns the text elements added to the requirements of the currently selected covered documents.
+
+Use brackets ([]) around a condition following an expression, as in <expr>[<cond>], to evaluate the expression and select only the elements that verify the condition. For example, requirements[STRMATCH(label,"DS_*")] returns the requirements whose label matches the string DS_.
+
+Frequently Used Statements
+Use the $SOME function followed by brackets ([]) around an expression to express a concept of existence and condition. For example, $SOME(documents.leafRequirements[isUncovered]) returns True if documents exist that contain uncovered leaf requirements.
+
+Use a combination of the EACH and ISA functions to express a concept of belonging. For example, EACH ISA Folder returns True only for an element that is a folder.
+
